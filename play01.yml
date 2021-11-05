@@ -1,0 +1,23 @@
+---
+- name: Install Apache web server
+  hosts: all
+
+  tasks:
+    - name: Install httpd
+      package: 
+        name: httpd
+        state: present
+    - name: Start httpd
+      service:
+        name: httpd
+        state: started
+    - name: Create index.html
+      copy:
+        dest: /var/www/html/index.html
+        content: 'Welcome to my web server'
+    - name: Open 80 port via firewalld
+      firewalld:
+        service: httpd
+        permanent: yes
+        state: enabled
+...

@@ -1,0 +1,19 @@
+---
+- name: Uninstall Apache web server
+  hosts: all
+
+  tasks:
+    - name: Uninstall httpd
+      package:
+        name: httpd
+        state: absent
+    - name: Delete file index.html
+      file:
+        dest: "/var/www/html/index.html"
+        state: absent
+    - name: Close 80 port via firewalld
+      firewalld:
+        service: http
+        permanent: yes
+        state: disabled
+...
