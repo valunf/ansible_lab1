@@ -17,5 +17,9 @@
         regexp: "^(GRUB_CMDLINE_LINUX=\".*)\"$"
         line: '\1 net\.ifnames=0 biosdevname=0"'
       when: grub_cmdline_check.found == 0
-      notify: grub2-mkconfig
+      notify: update_grub
+  handlers:
+    - name: update_grub
+      command:
+        cmd: grub2-mkconfig
 ...
