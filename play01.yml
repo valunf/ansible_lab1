@@ -10,6 +10,7 @@
     - name: Start httpd
       service:
         name: httpd
+        enabled: yes
         state: started
     - name: Create index.html
       copy:
